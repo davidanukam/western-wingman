@@ -1,0 +1,27 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model Sighting {
+  id           String   @id @default(cuid())
+  createdAt    DateTime @default(now())
+  lat          Float
+  lng          Float
+  gooseCount   Int
+  isNesting    Boolean  @default(false)
+  isAggressive Boolean  @default(false)
+  riskLevel    String   @default("low") // "low" | "medium" | "high"
+  description  String?
+  imageUrl     String?
+  aiSummary    String?
+  reporterName String?  @default("Anonymous")
+  locationName String?
+  upvotes      Int      @default(0)
+
+  @@index([lat, lng])
+  @@index([createdAt])
+}
