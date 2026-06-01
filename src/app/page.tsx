@@ -48,8 +48,6 @@ export default function HomePage() {
 
     return (
         <div className="relative flex min-h-dvh flex-col bg-western-purple-faint pb-20 md:pb-0">
-            {/* Subtle purple top glow — matches waddleloo's warm top gradient */}
-            {/* <div className="pointer-events-none absolute inset-x-0 top-0 z-0 h-32 bg-linear-to-b from-western-purple/20 via-western-purple/8 to-transparent" /> */}
 
             <Header />
 
@@ -124,7 +122,7 @@ export default function HomePage() {
                     <div className="overflow-hidden rounded-3xl border border-western-purple/15 bg-white shadow-sm">
                         {/* Map thumbnail */}
                         <div className="relative h-56 w-full border-b border-western-purple/10 md:h-[300px]">
-                            <GooseMapDynamic />
+                            <GooseMapDynamic sightings={sightings} />
                             <div className="absolute top-3 left-3 flex items-center gap-1.5 rounded-full border border-western-purple/20 bg-white/90 px-3 py-1 text-xs font-medium text-western-purple backdrop-blur-sm">
                                 <span className="size-1.5 animate-pulse rounded-full bg-green-500" />
                                 Off-season · Western campus live
@@ -209,7 +207,9 @@ export default function HomePage() {
 
                 {/* ─── TECH TICKER (mirrors waddleloo's "YOLO · GEMINI · NESTING" line) ─── */}
                 <div className="mt-10 flex items-center justify-center gap-4 text-[11px] font-semibold uppercase tracking-[0.18em] text-black/30">
-                    <span>Claude Vision</span>
+                    <span>YOLO</span>
+                    <span>·</span>
+                    <span>Gemini</span>
                     <span>·</span>
                     <span>Nesting Detection</span>
                     <span>·</span>
@@ -234,7 +234,7 @@ export default function HomePage() {
                     </p>
                     <div className="relative mt-8 overflow-hidden rounded-3xl border border-western-purple/15 shadow-sm">
                         <div className="h-64 w-full md:h-[380px]">
-                            <GooseMapDynamic />
+                            <GooseMapDynamic sightings={sightings} />
                         </div>
                         {/* Floating CTA over map — mirrors waddleloo's "Open Live Map" button */}
                         <div className="absolute bottom-5 left-1/2 -translate-x-1/2">
@@ -280,37 +280,20 @@ export default function HomePage() {
                         {steps.map((step, idx) => (
                             <div
                                 key={step.title}
-                                className={`rounded-2xl border p-5 shadow-sm transition ${idx === 1
-                                        ? "border-western-purple/20 bg-white shadow-western-purple/10"
-                                        : "border-black/8 bg-white/60"
-                                    }`}
+                                className="group rounded-2xl border border-black/8 bg-white/60 p-5 shadow-sm transition hover:border-western-purple/20 hover:bg-white hover:shadow-western-purple/10"
                             >
                                 <div className="flex items-start gap-4">
-                                    <div
-                                        className={`mt-0.5 flex size-9 shrink-0 items-center justify-center rounded-full ${idx === 1
-                                                ? "bg-black text-white"
-                                                : "bg-black/5 text-black/40"
-                                            }`}
-                                    >
+                                    <div className="mt-0.5 flex size-9 shrink-0 items-center justify-center rounded-full bg-black/5 text-black/40 transition group-hover:bg-black group-hover:text-white">
                                         <step.icon className="size-4" />
                                     </div>
                                     <div>
-                                        <p
-                                            className={`text-xs font-semibold uppercase tracking-wide ${idx === 1 ? "text-western-purple" : "text-black/30"
-                                                }`}
-                                        >
+                                        <p className="text-xs font-semibold uppercase tracking-wide text-black/30 transition group-hover:text-western-purple">
                                             {String(idx + 1).padStart(2, "0")}
                                         </p>
-                                        <h3
-                                            className={`mt-0.5 text-base font-semibold ${idx === 1 ? "text-black" : "text-black/50"
-                                                }`}
-                                        >
+                                        <h3 className="mt-0.5 text-base font-semibold text-black/50 transition group-hover:text-black">
                                             {step.title}
                                         </h3>
-                                        <p
-                                            className={`mt-1.5 text-sm ${idx === 1 ? "text-black/70" : "text-black/40"
-                                                }`}
-                                        >
+                                        <p className="mt-1.5 text-sm text-black/40 transition group-hover:text-black/70">
                                             {step.detail}
                                         </p>
                                     </div>
@@ -354,12 +337,12 @@ export default function HomePage() {
 
                     <div className="mt-8 flex flex-wrap items-center gap-4">
                         <a
-                            href="mailto:itsamrmj@gmail.com"
+                            href="mailto:davidanukam72@gmail.com"
                             className="inline-flex rounded-full bg-black px-6 py-3 font-semibold text-white transition hover:bg-western-purple"
                         >
                             Get in touch
                         </a>
-                        <span className="text-sm text-black/45">itsamrmj@gmail.com</span>
+                        <span className="text-sm text-black/45">davidanukam72@gmail.com</span>
                     </div>
                 </section>
 

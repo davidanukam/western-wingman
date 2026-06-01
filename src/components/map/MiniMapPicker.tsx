@@ -3,10 +3,8 @@
 import { useEffect, useRef, useState } from "react";
 import maplibregl from "maplibre-gl";
 import "maplibre-gl/dist/maplibre-gl.css";
-
-const MAP_STYLE =
-  process.env.NEXT_PUBLIC_MAPLIBRE_STYLE ??
-  "https://basemaps.cartocdn.com/gl/voyager-gl-style/style.json";
+import { DEFAULT_MAP_STYLE } from "@/lib/mapStyle";
+import { attachStyleImageFallback } from "./styleImageFallback";
 
 type MiniMapPickerProps = {
   lat: number;
@@ -31,7 +29,7 @@ export function MiniMapPicker({ lat, lng, onPick }: MiniMapPickerProps) {
 
     const map = new maplibregl.Map({
       container: containerRef.current,
-      style: MAP_STYLE,
+      style: DEFAULT_MAP_STYLE,
       center: [initialCenter.lng, initialCenter.lat],
       zoom: 16,
     });
@@ -42,6 +40,7 @@ export function MiniMapPicker({ lat, lng, onPick }: MiniMapPickerProps) {
 
     mapRef.current = map;
     markerRef.current = marker;
+    const detachImageFallback = attachStyleImageFallback(map);
 
     map.on("click", (e) => {
       const { lng: glng, lat: glat } = e.lngLat;
@@ -50,6 +49,7 @@ export function MiniMapPicker({ lat, lng, onPick }: MiniMapPickerProps) {
     });
 
     return () => {
+      detachImageFallback();
       marker.remove();
       map.remove();
       mapRef.current = null;

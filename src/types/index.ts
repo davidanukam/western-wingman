@@ -6,6 +6,7 @@ export type Sighting = {
   lat: number;
   lng: number;
   gooseCount: number;
+  detectionConfidence?: number | null;
   isNesting: boolean;
   isAggressive: boolean;
   riskLevel: RiskLevel;

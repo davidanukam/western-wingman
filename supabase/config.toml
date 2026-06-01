@@ -1,0 +1,20 @@
+# Supabase local dev config — link with: supabase link --project-ref YOUR_REF
+project_id = "western-wingman"
+
+[api]
+enabled = true
+port = 54321
+
+[db]
+port = 54322
+major_version = 15
+
+[studio]
+enabled = true
+port = 54323
+
+[storage]
+enabled = true
+
+[realtime]
+enabled = true

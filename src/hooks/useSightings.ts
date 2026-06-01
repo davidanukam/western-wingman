@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { createBrowserSupabaseClient } from "@/lib/supabase";
+import { mapSightingRow } from "@/lib/sightings";
 import type { Sighting } from "@/types";
 
 export function useSightings() {
@@ -20,16 +21,21 @@ export function useSightings() {
       });
 
     const supabase = createBrowserSupabaseClient();
-    if (!supabase) return () => { cancelled = true; };
+    if (!supabase) return () => {
+      cancelled = true;
+    };
 
     const channel = supabase
       .channel("sightings-realtime")
       .on(
         "postgres_changes",
-        { event: "INSERT", schema: "public", table: "Sighting" },
+        { event: "INSERT", schema: "public", table: "sightings" },
         (payload) => {
-          const row = payload.new as Sighting;
-          setSightings((prev) => [row, ...prev]);
+          const row = mapSightingRow(payload.new as Record<string, unknown>);
+          setSightings((prev) => {
+            if (prev.some((s) => s.id === row.id)) return prev;
+            return [row, ...prev];
+          });
         }
       )
       .subscribe();

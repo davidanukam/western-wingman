@@ -11,7 +11,18 @@ export function haversineMeters(lat1: number, lng1: number, lat2: number, lng2: 
   return R * c;
 }
 
+/** SW and NE corners [lng, lat] — main Western University campus + small margin */
+export const WESTERN_CAMPUS_BOUNDS = {
+  sw: [-81.305, 42.985] as [number, number],
+  ne: [-81.235, 43.035] as [number, number],
+};
+
 /** Rough campus bounding box (Western U) for filtering demo hotspots */
 export function isOnWesternCampus(lat: number, lng: number): boolean {
-  return lat >= 42.99 && lat <= 43.03 && lng >= -81.3 && lng <= -81.24;
+  const [[swLng, swLat], [neLng, neLat]] = [
+    WESTERN_CAMPUS_BOUNDS.sw,
+    WESTERN_CAMPUS_BOUNDS.ne,
+  ];
+  return lat >= swLat && lat <= neLat && lng >= swLng && lng <= neLng;
 }
+

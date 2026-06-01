@@ -68,9 +68,11 @@ function RiskAlertCards({ sightings }: { sightings: Sighting[] }) {
 function FilterTabs({
     value,
     onChange,
+    sightings,
 }: {
     value: FilterTab;
     onChange: (t: FilterTab) => void;
+    sightings: Sighting[];
 }) {
     const tabs: { id: FilterTab; label: string }[] = [
         { id: "all", label: "All" },
@@ -86,13 +88,14 @@ function FilterTabs({
                     type="button"
                     onClick={() => onChange(t.id)}
                     className={cn(
-                        "rounded-full px-3.5 py-1.5 text-xs font-semibold transition",
+                        "flex items-center gap-1.5 rounded-full px-3.5 py-1.5 text-xs font-semibold transition",
                         value === t.id
                             ? "bg-western-purple text-white shadow-sm"
                             : "bg-neutral-100 text-neutral-600 hover:bg-neutral-200/80"
                     )}
                 >
                     {t.label}
+                    <span className="text-[10px] font-medium opacity-75">{sightings.length}</span>
                 </button>
             ))}
         </div>
@@ -116,7 +119,7 @@ function CampusPanel({
         <div className={cn("flex min-h-0 flex-col bg-white", className)}>
             <LiveCounter sightings={sightings} />
             <RiskAlertCards sightings={sightings} />
-            <FilterTabs value={filter} onChange={onFilterChange} />
+            <FilterTabs value={filter} onChange={onFilterChange} sightings={sightings} />
             <div className="min-h-0 flex-1 overflow-y-auto px-3 pb-4">
                 {filtered.length === 0 ? (
                     <p className="px-1 py-4 text-center text-sm text-neutral-500">No sightings in this view.</p>
@@ -179,7 +182,7 @@ function Map3DButton({
             aria-pressed={tilted}
         >
             <Box className="mr-1 size-4" aria-hidden />
-            {tilted? "2D" : "3D"}
+            {tilted ? "2D" : "3D"}
         </Button>
     );
 }
@@ -196,12 +199,11 @@ export function MapPageClient() {
 
     return (
         <div className="relative flex h-dvh flex-col overflow-hidden bg-western-purple-faint">
-            {/* <div className="pointer-events-none absolute inset-x-0 top-0 z-0 h-24 bg-linear-to-b from-western-purple/25 via-western-purple/10 to-transparent" /> */}
 
             <Header />
 
             <div className="relative z-10 min-h-0 flex-1">
-                <GooseMapDynamic onMapReady={handleMapReady} />
+                <GooseMapDynamic sightings={sightings} onMapReady={handleMapReady} />
 
                 {/* Floating right panel - desktop */}
                 <aside

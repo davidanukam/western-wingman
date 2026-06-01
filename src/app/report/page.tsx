@@ -20,6 +20,7 @@ const DEFAULT_LNG = -81.2742;
 
 type Analysis = {
     gooseCount: number;
+    detectionConfidence: number | null;
     isNesting: boolean;
     isAggressive: boolean;
     riskLevel: RiskLevel;
@@ -28,9 +29,9 @@ type Analysis = {
 
 const whatHappensNext = [
     {
-        title: "Claude Vision analysis",
+        title: "YOLO detection",
         detail:
-            "Wingman AI scans your photo, counts every goose in frame, and returns a count with confidence scoring.",
+            "Roboflow scans your photo, counts every goose in frame, and returns a count with confidence scoring.",
     },
     {
         title: "Severity assessment",
@@ -61,6 +62,8 @@ export default function ReportPage() {
     const [locationName, setLocationName] = useState("");
     const [reporterName, setReporterName] = useState("");
     const [submitting, setSubmitting] = useState(false);
+    const [imageBase64, setImageBase64] = useState<string | null>(null);
+    const [imageMediaType, setImageMediaType] = useState<string>("image/jpeg");
 
     const analyzeFile = useCallback(async (file: File) => {
         const reader = new FileReader();
@@ -68,6 +71,8 @@ export default function ReportPage() {
             const dataUrl = reader.result as string;
             const base64 = dataUrl.split(",")[1];
             setImagePreview(dataUrl);
+            setImageBase64(base64);
+            setImageMediaType(file.type || "image/jpeg");
             setLoading(true);
             setAnalysis(null);
             try {
@@ -87,7 +92,7 @@ export default function ReportPage() {
                     return;
                 }
                 setAnalysis(data);
-                setGooseCount(Math.max(1, data.gooseCount || 1));
+                setGooseCount(data.gooseCount > 0 ? data.gooseCount : 0);
             } catch {
                 toast.error("Analysis request failed");
             } finally {
@@ -137,17 +142,25 @@ export default function ReportPage() {
 
     async function handleSubmit(e: React.FormEvent) {
         e.preventDefault();
+        if (!imageBase64) {
+            toast.error("Add a photo before submitting.");
+            return;
+        }
         setSubmitting(true);
         try {
-            const res = await fetch("/api/sightings", {
+            const res = await fetch("/api/report", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({
+                    imageBase64,
+                    mediaType: imageMediaType,
                     lat,
                     lng,
                     gooseCount,
+                    detectionConfidence: analysis?.detectionConfidence ?? null,
                     isNesting: analysis?.isNesting ?? false,
                     isAggressive: analysis?.isAggressive ?? false,
+                    riskLevel: analysis?.riskLevel,
                     description: description || undefined,
                     aiSummary: analysis?.summary,
                     locationName: locationName || undefined,
@@ -156,14 +169,25 @@ export default function ReportPage() {
             });
             if (!res.ok) {
                 const err = await res.json().catch(() => ({}));
-                toast.error("Could not save sighting", {
+                toast.error("Could not submit report", {
                     description:
                         typeof err.error === "string" ? err.error : "Try again later.",
                 });
                 return;
             }
-            toast.success("Sighting reported — stay safe out there, Mustang.");
+            const result = (await res.json()) as {
+                message?: string;
+                devLinks?: { approve: string; reject: string };
+            };
+            toast.success(
+                result.message ??
+                    "Report sent for review — it will appear on the map once approved."
+            );
+            if (result.devLinks) {
+                console.info("Approval links (dev):", result.devLinks);
+            }
             setImagePreview(null);
+            setImageBase64(null);
             setAnalysis(null);
             setDescription("");
             setLocationName("");
@@ -299,6 +323,11 @@ export default function ReportPage() {
                             <div className="mt-3 flex flex-wrap items-center gap-2">
                                 <span className="rounded-full bg-western-purple-faint px-3 py-1 text-sm font-semibold text-western-purple">
                                     {gooseCount} {gooseCount === 1 ? "goose" : "geese"}
+                                    {analysis.detectionConfidence != null && (
+                                        <span className="ml-1 font-normal text-western-purple/70">
+                                            · {Math.round(analysis.detectionConfidence * 100)}% conf.
+                                        </span>
+                                    )}
                                 </span>
                                 <RiskBadge level={analysis.riskLevel} />
                                 {analysis.isNesting && (
@@ -319,7 +348,7 @@ export default function ReportPage() {
                                 <Input
                                     id="count"
                                     type="number"
-                                    min={1}
+                                    min={0}
                                     max={500}
                                     value={gooseCount}
                                     onChange={(e) => setGooseCount(Number.parseInt(e.target.value, 10) || 1)}

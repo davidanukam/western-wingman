@@ -1,0 +1,135 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [-81.2735, 43.0098] },
+      "properties": { "kind": "campus", "name": "Western University", "subtitle": "Main Campus" }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [-81.2682, 43.0124] },
+      "properties": { "kind": "landmark", "name": "University College (UC)" }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [-81.2751, 43.0096] },
+      "properties": { "kind": "landmark", "name": "Weldon Library" }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [-81.2763, 43.0106] },
+      "properties": { "kind": "landmark", "name": "Middlesex College" }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [-81.2712, 43.0082] },
+      "properties": { "kind": "landmark", "name": "Thames Hall" }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [-81.2738, 43.0074] },
+      "properties": { "kind": "landmark", "name": "Social Science Centre" }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [-81.2792, 43.0071] },
+      "properties": { "kind": "landmark", "name": "Ivey Business School" }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [-81.2785, 43.0042] },
+      "properties": { "kind": "athletics", "name": "Alumni Stadium" }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [-81.2745, 43.0085] },
+      "properties": { "kind": "food", "name": "The Spoke" }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [-81.2728, 43.0092] },
+      "properties": { "kind": "food", "name": "The Wave" }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [-81.2695, 43.0112] },
+      "properties": { "kind": "residence", "name": "Delaware Hall" }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [-81.2648, 43.0135] },
+      "properties": { "kind": "residence", "name": "Medway-Sydenham Hall" }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [-81.2772, 43.0081] },
+      "properties": { "kind": "parking", "name": "Althouse Parking", "ref": "P" }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [-81.2721, 43.0062] },
+      "properties": { "kind": "parking", "name": "Talbot Lot", "ref": "P" }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [-81.2802, 43.0045] },
+      "properties": { "kind": "parking", "name": "Springett Lot", "ref": "P" }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [-81.2688, 43.0108] },
+      "properties": { "kind": "parking", "name": "UC Hill Lot", "ref": "P" }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [-81.2812, 43.0072] },
+      "properties": { "kind": "bus", "name": "Richmond & Western", "ref": "Bus" }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [-81.2725, 43.0095] },
+      "properties": { "kind": "bus", "name": "University Community Centre", "ref": "Bus" }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [-81.2755, 43.0102] },
+      "properties": { "kind": "bus", "name": "Weldon Library Stop", "ref": "Bus" }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [-81.2655, 43.0128] },
+      "properties": { "kind": "bus", "name": "Huron Flats", "ref": "Bus" }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [-81.2625, 43.0152] },
+      "properties": { "kind": "landmark", "name": "Medway Creek" }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [-81.2835, 43.0068] },
+      "properties": { "kind": "road", "name": "Richmond Street", "ref": "4" }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [-81.2885, 43.0085] },
+      "properties": { "kind": "road", "name": "Western Road", "ref": null }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [-81.2715, 43.0055] },
+      "properties": { "kind": "road", "name": "Perth Drive", "ref": null }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [-81.2595, 43.0115] },
+      "properties": { "kind": "road", "name": "Sarnia Road", "ref": null }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [-81.2765, 43.0038] },
+      "properties": { "kind": "road", "name": "Elgin Drive", "ref": null }
+    }
+  ]
+}

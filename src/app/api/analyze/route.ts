@@ -1,16 +1,22 @@
 import { NextResponse } from "next/server";
-import Anthropic from "@anthropic-ai/sdk";
 import { z } from "zod";
-
-const client = new Anthropic();
+import {
+  analyzeGooseBehavior,
+  defaultBehaviorAnalysis,
+  isGeminiConfigured,
+} from "@/lib/gemini";
+import { detectGeese, isRoboflowConfigured } from "@/lib/roboflow";
+import { isAllowedImageMediaType, normalizeImageMediaType } from "@/lib/media";
+import { computeRiskLevel } from "@/lib/sightings";
 
 const BodySchema = z.object({
   imageBase64: z.string().min(1),
-  mediaType: z.enum(["image/jpeg", "image/png", "image/gif", "image/webp"]),
+  mediaType: z.string().min(1),
 });
 
 const AnalysisSchema = z.object({
   gooseCount: z.number().int().min(0).max(500),
+  detectionConfidence: z.number().min(0).max(1).nullable(),
   isNesting: z.boolean(),
   isAggressive: z.boolean(),
   riskLevel: z.enum(["low", "medium", "high"]),
@@ -20,48 +26,51 @@ const AnalysisSchema = z.object({
 export async function POST(req: Request) {
   try {
     const json = await req.json();
-    const { imageBase64, mediaType } = BodySchema.parse(json);
+    const { imageBase64, mediaType: rawMediaType } = BodySchema.parse(json);
+    if (!isAllowedImageMediaType(rawMediaType)) {
+      return NextResponse.json({ error: "Unsupported image type" }, { status: 400 });
+    }
+    const mediaType = normalizeImageMediaType(rawMediaType);
 
-    if (!process.env.ANTHROPIC_API_KEY) {
-      return NextResponse.json({ error: "ANTHROPIC_API_KEY is not configured" }, { status: 503 });
+    if (!isRoboflowConfigured()) {
+      return NextResponse.json(
+        { error: "ROBOFLOW_API_KEY and ROBOFLOW_MODEL_ID are not configured" },
+        { status: 503 }
+      );
     }
 
-    const message = await client.messages.create({
-      model: "claude-sonnet-4-20250514",
-      max_tokens: 300,
-      messages: [
-        {
-          role: "user",
-          content: [
-            {
-              type: "image",
-              source: { type: "base64", media_type: mediaType, data: imageBase64 },
-            },
-            {
-              type: "text",
-              text: `Analyze this image for Canada geese on a university campus. Return ONLY valid JSON with these fields:
-{
-  "gooseCount": <number, 0 if no geese>,
-  "isNesting": <true if a goose is sitting on a nest or eggs are visible>,
-  "isAggressive": <true if a goose is hissing, wings spread, or charging>,
-  "riskLevel": "low" | "medium" | "high",
-  "summary": "<one sentence description max 100 chars>"
-}`,
-            },
-          ],
-        },
-      ],
+    const detection = await detectGeese(imageBase64);
+    const gooseCount = detection.gooseCount;
+
+    let behavior;
+    if (isGeminiConfigured()) {
+      try {
+        behavior = await analyzeGooseBehavior(
+          imageBase64,
+          mediaType,
+          gooseCount,
+          detection.detectionConfidence
+        );
+      } catch (e) {
+        console.error("Gemini behavior analysis failed:", e);
+        behavior = defaultBehaviorAnalysis(gooseCount);
+      }
+    } else {
+      behavior = defaultBehaviorAnalysis(gooseCount);
+    }
+
+    const riskLevel =
+      behavior.riskLevel ??
+      computeRiskLevel(behavior.isAggressive, behavior.isNesting, gooseCount);
+
+    const result = AnalysisSchema.parse({
+      gooseCount,
+      detectionConfidence: detection.detectionConfidence,
+      isNesting: behavior.isNesting,
+      isAggressive: behavior.isAggressive,
+      riskLevel,
+      summary: behavior.summary,
     });
-
-    const block = message.content[0];
-    if (block.type !== "text") {
-      return NextResponse.json({ error: "Unexpected response from model" }, { status: 502 });
-    }
-
-    const raw = block.text.trim();
-    const jsonSlice = raw.match(/\{[\s\S]*\}/);
-    const parsed = JSON.parse(jsonSlice ? jsonSlice[0] : raw);
-    const result = AnalysisSchema.parse(parsed);
 
     return NextResponse.json(result);
   } catch (e) {
@@ -69,6 +78,7 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: e.flatten() }, { status: 400 });
     }
     console.error(e);
-    return NextResponse.json({ error: "Analysis failed" }, { status: 500 });
+    const message = e instanceof Error ? e.message : "Analysis failed";
+    return NextResponse.json({ error: message }, { status: 500 });
   }
 }
