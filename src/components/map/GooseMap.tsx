@@ -106,7 +106,6 @@ export function GooseMap({ onMapReady }: GooseMapProps) {
       zoom: 15,
     });
 
-    map.addControl(new maplibregl.NavigationControl({ showCompass: false }), "top-right");
     mapInstance.current = map;
 
     const onLoad = () => {
@@ -129,5 +128,5 @@ export function GooseMap({ onMapReady }: GooseMapProps) {
     applySightingsToMap(m, sightings);
   }, [sightings, mapReady]);
 
-  return <div ref={containerRef} className="h-full w-full min-h-[240px]" />;
+  return <div ref={containerRef} className="h-full w-full min-h-60" />;
 }
