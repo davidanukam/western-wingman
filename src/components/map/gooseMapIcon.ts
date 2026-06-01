@@ -13,7 +13,7 @@ export const GOOSE_MARKER_SIZE_STOPS: ReadonlyArray<[zoom: number, size: number]
     [14, 0.23],
     [15, 0.24],
     [16, 0.25],
-    [18, 0.3],
+    [18, 0.3]
 ];
 
 /** Uniform multiplier on every stop (e.g. 1.15 = 15% larger at all zoom levels). */
