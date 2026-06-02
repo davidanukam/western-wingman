@@ -19,22 +19,22 @@ export function Header() {
                             alt=""
                             width={40}
                             height={40}
-                            className="size-9 shrink-0 object-contain md:size-10"
+                            className="size-9 shrink-0 object-contain md:size-10 hover:scale-105 transition-all"
                         />
-                        <span className="flex flex-col leading-tight text-lg font-semibold tracking-tight text-western-purple md:text-lg">
+                        <span className="flex flex-col leading-tight text-lg font-semibold tracking-tight text-black hover:text-western-purple hover:scale-105 transition-all md:text-lg">
                             <span>Western Wingman</span>
                         </span>
                     </Link>
                     <nav className="flex shrink-0 items-center gap-2 text-sm md:gap-4">
                         <Link
                             href="/report"
-                            className="hidden font-medium text-neutral-700 hover:text-western-purple sm:inline"
+                            className="hidden font-medium text-neutral-700 hover:text-western-purple hover:scale-105 transition-all sm:inline"
                         >
                             Report Sighting
                         </Link>
                         <Link
                             href="/report"
-                            className="font-medium text-neutral-700 hover:text-western-purple sm:hidden"
+                            className="font-medium text-neutral-700 hover:text-western-purple sm:hidden hover:scale-105 transition-all"
                             aria-label="Report sighting"
                         >
                             Report
@@ -42,7 +42,7 @@ export function Header() {
                         <Link
                             href="/map"
                             className={cn(
-                                "rounded-full px-4 py-1.5 text-sm font-semibold shadow-sm transition md:px-4 md:py-1.5 bg-western-purple text-white hover:bg-western-purple-dark"
+                                "rounded-full px-4 py-1.5 text-sm font-semibold shadow-sm transition md:px-4 md:py-1.5 bg-western-purple text-white hover:bg-western-purple-dark hover:scale-105 transition-all"
                             )}
                         >
                             Live Map

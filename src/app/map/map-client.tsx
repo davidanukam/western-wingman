@@ -88,7 +88,7 @@ function FilterTabs({
                     type="button"
                     onClick={() => onChange(t.id)}
                     className={cn(
-                        "flex items-center gap-1.5 rounded-full px-3.5 py-1.5 text-xs font-semibold transition",
+                        "flex items-center gap-1.5 cursor-pointer hover:scale-105 rounded-full px-3.5 py-1.5 text-xs font-semibold transition",
                         value === t.id
                             ? "bg-western-purple text-white shadow-sm"
                             : "bg-neutral-100 text-neutral-600 hover:bg-neutral-200/80"
@@ -137,14 +137,14 @@ function SafeRouteButton({ className }: { className?: string }) {
             type="button"
             variant="secondary"
             className={cn(
-                "rounded-full border border-black/10 bg-white font-semibold text-neutral-800 shadow-md hover:border-western-purple/30 hover:text-western-purple hover:bg-white",
+                "rounded-full border border-black/10 bg-green-500 font-semibold text-white shadow-md hover:bg-green-600 hover:px-6 hover:opacity-80",
                 className
             )}
             onClick={() =>
                 toast.message("Safe route", { description: "Routing around hotspots is coming soon." })
             }
         >
-            <Shield className="mr-1.5 size-4 text-neutral-600" aria-hidden />
+            <Shield className="mr-1.5 size-4 text-white" aria-hidden />
             Safe route
         </Button>
     );
@@ -171,19 +171,21 @@ function Map3DButton({
     }, [tilted, mapRef]);
 
     return (
-        <Button
-            type="button"
-            variant="secondary"
-            className={cn(
-                "rounded-full border border-black/10 bg-white px-3 font-bold text-neutral-700 shadow-md hover:border-western-purple/30 hover:text-western-purple hover:bg-white",
-                className
-            )}
-            onClick={toggle}
-            aria-pressed={tilted}
-        >
-            <Box className="mr-1 size-4" aria-hidden />
-            {tilted ? "2D" : "3D"}
-        </Button>
+        <div>
+            <Button
+                type="button"
+                variant="secondary"
+                className={cn(
+                    "rounded-full border border-black/10 bg-white px-3 font-bold text-western-purple shadow-md hover:px-4 hover:bg-western-purple-faint",
+                    className
+                )}
+                onClick={toggle}
+                aria-pressed={tilted}
+            >
+                <Box className="mr-1 size-4" aria-hidden />
+                {tilted ? "2D" : "3D"}
+            </Button>
+        </div>
     );
 }
 
@@ -225,9 +227,9 @@ export function MapPageClient() {
                         Sightings
                     </Button>
                     <div className="pointer-events-auto flex max-w-full flex-wrap items-center justify-center gap-2 md:gap-3">
-                        <ReportButton className="h-12 shrink-0 rounded-full bg-black px-5 text-base text-white shadow-lg hover:bg-western-purple sm:px-6" />
-                        <SafeRouteButton className="h-12 shrink-0 rounded-full px-4 sm:px-5" />
-                        <Map3DButton mapRef={mapRef} className="h-12 shrink-0" />
+                        <ReportButton className="h-12 shrink-0 rounded-full bg-black px-5 text-base text-white shadow-lg hover:bg-western-purple sm:px-6 hover:px-7" />
+                        <Map3DButton mapRef={mapRef} className="h-12 shrink-0 cursor-pointer" />
+                        <SafeRouteButton className="h-12 shrink-0 rounded-full px-4 sm:px-5 cursor-pointer" />
                     </div>
                 </div>
 
