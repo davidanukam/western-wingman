@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useMemo, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import type maplibregl from "maplibre-gl";
 import { Box, List, Shield, TriangleAlert } from "lucide-react";
 import { toast } from "sonner";
@@ -189,14 +189,44 @@ function Map3DButton({
     );
 }
 
+/** TEMP: remove after tuning goose marker zoom stops */
+function MapZoomDebug({ map }: { map: maplibregl.Map | null }) {
+    const [zoom, setZoom] = useState<number | null>(null);
+
+    useEffect(() => {
+        if (!map) return;
+        const update = () => setZoom(map.getZoom());
+        update();
+        map.on("zoom", update);
+        map.on("moveend", update);
+        return () => {
+            map.off("zoom", update);
+            map.off("moveend", update);
+        };
+    }, [map]);
+
+    if (zoom === null) return null;
+
+    return (
+        <div
+            className="pointer-events-none absolute top-3 left-3 z-20 rounded-lg border border-black/10 bg-white/90 px-2.5 py-1.5 font-mono text-xs font-semibold text-neutral-800 shadow-md backdrop-blur-sm"
+            aria-hidden
+        >
+            zoom {zoom.toFixed(2)}
+        </div>
+    );
+}
+
 export function MapPageClient() {
     const { sightings } = useSightings();
     const [sheetOpen, setSheetOpen] = useState(false);
     const [filter, setFilter] = useState<FilterTab>("all");
     const mapRef = useRef<maplibregl.Map | null>(null);
+    const [mapInstance, setMapInstance] = useState<maplibregl.Map | null>(null);
 
     const handleMapReady = useCallback((map: maplibregl.Map) => {
         mapRef.current = map;
+        setMapInstance(map);
     }, []);
 
     return (
@@ -206,6 +236,7 @@ export function MapPageClient() {
 
             <div className="relative z-10 min-h-0 flex-1">
                 <GooseMapDynamic sightings={sightings} onMapReady={handleMapReady} />
+                <MapZoomDebug map={mapInstance} />
 
                 {/* Floating right panel - desktop */}
                 <aside

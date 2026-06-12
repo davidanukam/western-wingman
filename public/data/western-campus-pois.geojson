@@ -114,22 +114,22 @@
     {
       "type": "Feature",
       "geometry": { "type": "Point", "coordinates": [-81.2885, 43.0085] },
-      "properties": { "kind": "road", "name": "Western Road", "ref": null }
+      "properties": { "kind": "road", "name": "Western Road" }
     },
     {
       "type": "Feature",
       "geometry": { "type": "Point", "coordinates": [-81.2715, 43.0055] },
-      "properties": { "kind": "road", "name": "Perth Drive", "ref": null }
+      "properties": { "kind": "road", "name": "Perth Drive" }
     },
     {
       "type": "Feature",
       "geometry": { "type": "Point", "coordinates": [-81.2595, 43.0115] },
-      "properties": { "kind": "road", "name": "Sarnia Road", "ref": null }
+      "properties": { "kind": "road", "name": "Sarnia Road" }
     },
     {
       "type": "Feature",
       "geometry": { "type": "Point", "coordinates": [-81.2765, 43.0038] },
-      "properties": { "kind": "road", "name": "Elgin Drive", "ref": null }
+      "properties": { "kind": "road", "name": "Elgin Drive" }
     }
   ]
 }

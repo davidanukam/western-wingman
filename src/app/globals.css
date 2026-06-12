@@ -144,3 +144,75 @@
     @apply font-sans;
   }
 }
+
+/* Goose sighting markers (HTML MapLibre markers — not WebGL symbol layer) */
+.goose-map-marker {
+  border: none;
+  background: transparent;
+  padding: 0;
+  cursor: pointer;
+  line-height: 0;
+  transform: scale(var(--goose-scale, 1));
+  transform-origin: bottom center;
+  transition: transform 0.15s ease;
+}
+
+.goose-map-marker:hover,
+.goose-map-marker:focus-visible {
+  transform: scale(calc(var(--goose-scale, 1) * 1.08));
+  outline: none;
+}
+
+.goose-map-marker img {
+  display: block;
+  pointer-events: none;
+  filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.28));
+}
+
+.goose-sighting-popup.maplibregl-popup {
+  z-index: 30;
+}
+
+.goose-sighting-popup .maplibregl-popup-content {
+  padding: 0;
+  border-radius: 12px;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.14);
+  overflow: hidden;
+}
+
+.goose-sighting-popup .maplibregl-popup-tip {
+  border-top-color: #fff;
+}
+
+.goose-popup {
+  padding: 12px 14px;
+  max-width: 260px;
+}
+
+.goose-popup__title {
+  font-size: 0.9375rem;
+  font-weight: 700;
+  color: #111827;
+  line-height: 1.3;
+}
+
+.goose-popup__meta {
+  margin-top: 4px;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: #374151;
+}
+
+.goose-popup__dot {
+  margin: 0 0.35rem;
+  color: #9ca3af;
+  font-weight: 400;
+}
+
+.goose-popup__summary {
+  margin-top: 8px;
+  font-size: 0.8125rem;
+  line-height: 1.45;
+  color: #4b5563;
+}

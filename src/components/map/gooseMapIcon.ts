@@ -10,14 +10,14 @@ export const GOOSE_MARKER_URL = "/goose-map-icon.svg";
  */
 export const GOOSE_MARKER_SIZE_STOPS: ReadonlyArray<[zoom: number, size: number]> = [
     [12, 0.2],
-    [14, 0.23],
-    [15, 0.24],
-    [16, 0.25],
+    [14, 0.21],
+    [15, 0.22],
+    [16, 0.23],
     [18, 0.3]
 ];
 
 /** Uniform multiplier on every stop (e.g. 1.15 = 15% larger at all zoom levels). */
-export const GOOSE_MARKER_SIZE_SCALE = 1;
+export const GOOSE_MARKER_SIZE_SCALE = 0.5;
 
 /** MapLibre layout `icon-size` — shrinks when zoomed out, grows when zoomed in. */
 export function gooseMarkerIconSizeExpression(): ExpressionSpecification {

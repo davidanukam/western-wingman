@@ -10,7 +10,8 @@
     "postinstall": "prisma generate",
     "setup:storage": "node scripts/setup-supabase-storage.mjs",
     "setup:db": "node scripts/setup-supabase-db.mjs",
-    "setup:supabase": "npm run setup:db && npm run setup:storage"
+    "setup:supabase": "npm run setup:db && npm run setup:storage",
+    "flatten:goose-icon": "node scripts/flatten-goose-icon.mjs"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.86.1",

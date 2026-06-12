@@ -62,10 +62,13 @@ export async function ensureCampusDetailLayers(map: maplibregl.Map): Promise<voi
       "text-font": [...MAP_TEXT_FONT_BOLD],
       "text-size": 11,
       "text-anchor": "top",
-      "icon-image": "campus-road",
+      "icon-image": [
+        "case",
+        ["all", ["has", "ref"], ["!=", ["get", "ref"], ""]],
+        "campus-road",
+        ["literal", ""],
+      ],
       "icon-size": 0.75,
-      "icon-text-fit": "both",
-      "icon-text-fit-padding": [2, 4, 2, 4],
       "icon-allow-overlap": false,
     },
     paint: {

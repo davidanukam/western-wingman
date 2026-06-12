@@ -3,16 +3,18 @@ import type { Sighting } from "@/types";
 export function buildSightingsGeoJSON(sightings: Sighting[]): GeoJSON.FeatureCollection {
   return {
     type: "FeatureCollection",
-    features: sightings.map((s) => ({
-      type: "Feature" as const,
-      geometry: { type: "Point" as const, coordinates: [s.lng, s.lat] },
-      properties: {
-        weight: s.gooseCount,
-        risk: s.riskLevel === "high" ? 1 : s.riskLevel === "medium" ? 0.5 : 0.2,
-        id: s.id,
-        riskLevel: s.riskLevel,
-      },
-    })),
+    features: sightings
+      .filter((s) => Number.isFinite(s.lat) && Number.isFinite(s.lng))
+      .map((s) => ({
+        type: "Feature" as const,
+        geometry: { type: "Point" as const, coordinates: [s.lng, s.lat] },
+        properties: {
+          weight: s.gooseCount,
+          risk: s.riskLevel === "high" ? 1 : s.riskLevel === "medium" ? 0.5 : 0.2,
+          id: s.id,
+          riskLevel: s.riskLevel,
+        },
+      })),
   };
 }
 
