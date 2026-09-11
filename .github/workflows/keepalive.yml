@@ -1,0 +1,37 @@
+name: Keep Supabase awake
+
+on:
+  schedule:
+    # Daily noon America/Toronto is 16:00 UTC during EDT and 17:00 UTC during EST.
+    - cron: "0 16 * * *"
+    - cron: "0 17 * * *"
+  workflow_dispatch:
+
+jobs:
+  keepalive:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Ping production at noon Eastern
+        env:
+          SITE_URL: ${{ vars.SITE_URL }}
+        run: |
+          set -euo pipefail
+          BASE="${SITE_URL:-https://western-wingman.vercel.app}"
+          BASE="${BASE%/}"
+          NOW="$(TZ=America/Toronto date -Iseconds)"
+          HOUR="$(TZ=America/Toronto date +%H)"
+          echo "America/Toronto: $NOW"
+
+          if [ "${GITHUB_EVENT_NAME}" != "workflow_dispatch" ]; then
+            if [ "$HOUR" != "12" ]; then
+              echo "Skipping: not noon Eastern (hour=$HOUR)"
+              exit 0
+            fi
+          fi
+
+          echo "Pinging $BASE/"
+          curl -fsS -o /dev/null -w "home %{http_code}\n" "$BASE/"
+
+          echo "Pinging $BASE/api/keepalive"
+          curl -fsS "$BASE/api/keepalive"
+          echo
