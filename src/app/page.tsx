@@ -121,7 +121,7 @@ export default function HomePage() {
                     {/* Right: live map preview + sighting list */}
                     <div className="overflow-hidden rounded-3xl border border-western-purple/15 bg-white shadow-sm">
                         {/* Map thumbnail */}
-                        <div className="relative h-56 w-full border-b border-western-purple/10 md:h-[300px]">
+                        <div className="relative h-56 w-full border-b border-western-purple/10 md:h-75">
                             <GooseMapDynamic sightings={sightings} />
                             <div className="absolute top-3 left-3 flex items-center gap-1.5 rounded-full border border-western-purple/20 bg-white/90 px-3 py-1 text-xs font-medium text-western-purple backdrop-blur-sm">
                                 <span className="size-1.5 animate-pulse rounded-full bg-green-500" />
@@ -233,7 +233,7 @@ export default function HomePage() {
                         with anyone else.
                     </p>
                     <div className="relative mt-8 overflow-hidden rounded-3xl border border-western-purple/15 shadow-sm">
-                        <div className="h-64 w-full md:h-[380px]">
+                        <div className="h-64 w-full md:h-95">
                             <GooseMapDynamic sightings={sightings} />
                         </div>
                         {/* Floating CTA over map — mirrors waddleloo's "Open Live Map" button */}
@@ -321,7 +321,7 @@ export default function HomePage() {
                     </p>
 
                     {/* Stats row — mirrors waddleloo's 4-stat grid */}
-                    <div className="mt-10 grid gap-6 border-y border-black/8 py-8 md:grid-cols-4">
+                    {/* <div className="mt-10 grid gap-6 border-y border-black/8 py-8 md:grid-cols-4">
                         {[
                             { stat: "35k+", label: "students at Western" },
                             { stat: "100%", label: "Western-focused, zero wasted reach" },
@@ -333,7 +333,7 @@ export default function HomePage() {
                                 <p className="mt-1 text-sm text-black/55">{label}</p>
                             </div>
                         ))}
-                    </div>
+                    </div> */}
 
                     <div className="mt-8 flex flex-wrap items-center gap-4">
                         <a
