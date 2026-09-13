@@ -77,12 +77,12 @@ export default function HomePage() {
                                 Live Campus Map · Western University
                             </div>
                             <h1 className="text-5xl font-bold leading-[0.95] tracking-tight text-black md:text-7xl">
-                                Avoid the
+                                Dodge the
                                 <br />
-                                <span className="text-western-purple">Honk.</span>
+                                <span className="text-western-purple">Waddling Warlords!</span>
                             </h1>
                             <p className="mt-5 text-xl font-medium text-black/80">
-                                Western's live goose tracker.
+                                Western's live AI goose tracker.
                             </p>
                             <p className="mt-4 max-w-xl text-pretty text-black/65">
                                 Upload a photo, get an instant goose count, nesting and gosling

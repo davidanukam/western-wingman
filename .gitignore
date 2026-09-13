@@ -24,6 +24,8 @@
 .agents/
 skills-lock.json
 .claude/
+AGENTS.md
+CLAUDE.md
 
 # misc
 .DS_Store
