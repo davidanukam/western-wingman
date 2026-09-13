@@ -64,6 +64,12 @@ export function GooseMap({ sightings, onMapReady, interactive = true }: GooseMap
     canvas.addEventListener("webglcontextlost", (e) => {
       e.preventDefault();
     });
+    if (!interactive) {
+      canvas.style.pointerEvents = "none";
+      canvas.style.touchAction = "pan-y";
+      map.getCanvasContainer().style.pointerEvents = "none";
+      map.getCanvasContainer().style.touchAction = "pan-y";
+    }
 
     const syncMinZoom = () => applyWesternCampusMinZoom(map);
 

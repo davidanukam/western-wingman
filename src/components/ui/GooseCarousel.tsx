@@ -12,11 +12,17 @@ const SLIDES = [
 
 const COUNT = SLIDES.length;
 const ANGLE = 360 / COUNT;
+const LOCK_PX = 10;
+
+type DragLock = "undecided" | "carousel" | "page";
 
 export function GooseCarousel() {
   const rotRef = useRef(0);
   const velRef = useRef(0);
   const dragging = useRef(false);
+  const lockRef = useRef<DragLock>("undecided");
+  const startX = useRef(0);
+  const startY = useRef(0);
   const lastX = useRef(0);
   const ringRef = useRef<HTMLDivElement>(null);
   const rootRef = useRef<HTMLDivElement>(null);
@@ -58,36 +64,58 @@ export function GooseCarousel() {
     const root = rootRef.current;
     if (!root) return;
     const onWheel = (e: WheelEvent) => {
+      if (Math.abs(e.deltaX) <= Math.abs(e.deltaY)) return;
       e.preventDefault();
-      velRef.current += e.deltaY * 0.04 + e.deltaX * 0.04;
+      velRef.current += e.deltaX * 0.04;
     };
     root.addEventListener("wheel", onWheel, { passive: false });
     return () => root.removeEventListener("wheel", onWheel);
   }, []);
 
   const onPointerDown = (e: React.PointerEvent) => {
-    dragging.current = true;
+    lockRef.current = "undecided";
+    dragging.current = false;
+    startX.current = e.clientX;
+    startY.current = e.clientY;
     lastX.current = e.clientX;
     velRef.current = 0;
-    (e.currentTarget as HTMLElement).setPointerCapture(e.pointerId);
   };
 
   const onPointerMove = (e: React.PointerEvent) => {
-    if (!dragging.current) return;
-    const dx = e.clientX - lastX.current;
+    if (lockRef.current === "page") return;
+
+    if (lockRef.current === "undecided") {
+      const dx = e.clientX - startX.current;
+      const dy = e.clientY - startY.current;
+      if (Math.abs(dx) < LOCK_PX && Math.abs(dy) < LOCK_PX) return;
+      if (Math.abs(dy) >= Math.abs(dx)) {
+        lockRef.current = "page";
+        return;
+      }
+      lockRef.current = "carousel";
+      dragging.current = true;
+      try {
+        (e.currentTarget as HTMLElement).setPointerCapture(e.pointerId);
+      } catch {
+        /* capture is best-effort */
+      }
+    }
+
+    const step = e.clientX - lastX.current;
     lastX.current = e.clientX;
-    velRef.current = dx * 0.22;
+    velRef.current = step * 0.22;
     rotRef.current += velRef.current;
   };
 
   const endDrag = () => {
     dragging.current = false;
+    lockRef.current = "undecided";
   };
 
   return (
     <div
       ref={rootRef}
-      className="relative mx-auto h-[22rem] w-full max-w-full cursor-grab touch-none overflow-hidden select-none active:cursor-grabbing [--carousel-radius:9.75rem] md:h-[28rem] md:[--carousel-radius:15rem] [perspective:900px] md:[perspective:1200px]"
+      className="relative mx-auto h-[22rem] w-full max-w-full cursor-grab touch-pan-y overflow-hidden select-none active:cursor-grabbing [--carousel-radius:9.75rem] md:h-[28rem] md:[--carousel-radius:15rem] [perspective:900px] md:[perspective:1200px]"
       onPointerDown={onPointerDown}
       onPointerMove={onPointerMove}
       onPointerUp={endDrag}

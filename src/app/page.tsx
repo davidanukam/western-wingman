@@ -119,9 +119,16 @@ export default function HomePage() {
                     {/* Right: live map preview + sighting list */}
                     <div className="overflow-hidden rounded-3xl border border-western-purple/15 bg-white shadow-sm">
                         {/* Map thumbnail */}
-                        <div className="relative h-56 w-full border-b border-western-purple/10 md:h-75">
-                            <GooseMapDynamic sightings={sightings} />
-                            <div className="absolute top-3 left-3 flex items-center gap-1.5 rounded-full border border-western-purple/20 bg-white/90 px-3 py-1 text-xs font-medium text-western-purple backdrop-blur-sm">
+                        <div className="relative h-56 w-full overflow-hidden border-b border-western-purple/10 md:h-75">
+                            <div className="pointer-events-none absolute inset-0">
+                                <GooseMapDynamic sightings={sightings} interactive={false} />
+                            </div>
+                            <Link
+                                href="/map"
+                                className="absolute inset-0 z-10"
+                                aria-label="Open live campus map"
+                            />
+                            <div className="pointer-events-none absolute top-3 left-3 z-20 flex items-center gap-1.5 rounded-full border border-western-purple/20 bg-white/90 px-3 py-1 text-xs font-medium text-western-purple backdrop-blur-sm">
                                 <span className="size-1.5 animate-pulse rounded-full bg-green-500" />
                                 Off-season · Western campus live
                             </div>
