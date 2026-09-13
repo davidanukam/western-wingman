@@ -199,10 +199,10 @@ export default function ReportPage() {
     }
 
     return (
-        <div className="flex min-h-dvh flex-col bg-western-purple-faint pb-24 md:pb-8">
+        <div className="flex min-h-dvh w-full min-w-0 flex-col overflow-x-hidden bg-western-purple-faint pb-24 md:overflow-x-visible md:pb-8">
             <Header />
 
-            <main className="mx-auto w-full max-w-2xl flex-1 px-6 py-10 md:py-14">
+            <main className="mx-auto w-full min-w-0 max-w-2xl flex-1 px-4 py-10 sm:px-6 md:py-14">
 
                 {/* Page header */}
                 <div className="mb-10">

@@ -16,9 +16,11 @@ const WESTERN_CENTER: [number, number] = [-81.2742, 43.0096];
 export type GooseMapProps = {
   sightings: Sighting[];
   onMapReady?: (map: maplibregl.Map) => void;
+  /** When false, the map is a static preview (no pan, zoom, or rotate). */
+  interactive?: boolean;
 };
 
-export function GooseMap({ sightings, onMapReady }: GooseMapProps) {
+export function GooseMap({ sightings, onMapReady, interactive = true }: GooseMapProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const mapInstance = useRef<maplibregl.Map | null>(null);
   const onMapReadyRef = useRef(onMapReady);
@@ -51,6 +53,7 @@ export function GooseMap({ sightings, onMapReady }: GooseMapProps) {
       zoom: 15,
       fadeDuration: 0,
       refreshExpiredTiles: false,
+      interactive,
     });
 
     mapInstance.current = map;

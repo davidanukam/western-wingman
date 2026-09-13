@@ -47,7 +47,7 @@ export default function HomePage() {
     const mapPreview = sightings.slice(0, 4);
 
     return (
-        <div className="relative flex min-h-dvh flex-col bg-western-purple-faint pb-20 md:pb-0">
+        <div className="relative flex min-h-dvh w-full min-w-0 flex-col overflow-x-hidden bg-western-purple-faint pb-20 md:overflow-x-visible md:pb-0">
 
             <Header />
 
@@ -60,7 +60,7 @@ export default function HomePage() {
                 </div>
             </div>
 
-            <main className="relative z-10 mx-auto w-full max-w-lg flex-1 px-6 pt-8 pb-10 md:max-w-6xl md:pt-12">
+            <main className="relative z-10 mx-auto w-full min-w-0 max-w-lg flex-1 px-4 pt-8 pb-10 sm:px-6 md:max-w-6xl md:pt-12">
 
                 {/* ─── HERO SPLIT ─── */}
                 <motion.section
@@ -70,13 +70,13 @@ export default function HomePage() {
                     className="grid items-stretch gap-6 md:grid-cols-[1.05fr_1fr]"
                 >
                     {/* Left: headline + CTAs */}
-                    <div className="flex flex-col justify-between rounded-3xl border border-western-purple/15 bg-white p-7 shadow-sm md:p-10">
+                    <div className="flex min-w-0 flex-col justify-between rounded-3xl border border-western-purple/15 bg-white p-6 shadow-sm sm:p-7 md:p-10">
                         <div>
                             <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-western-purple/20 bg-western-purple-faint px-3 py-1 text-xs font-semibold text-western-purple">
                                 <span className="size-1.5 rounded-full bg-western-purple animate-pulse" />
                                 Live Campus Map · Western University
                             </div>
-                            <h1 className="text-5xl font-bold leading-[0.95] tracking-tight text-black md:text-7xl">
+                            <h1 className="text-4xl font-bold leading-[0.95] tracking-tight break-words text-black sm:text-5xl md:text-7xl">
                                 Dodge the
                                 <br />
                                 <span className="text-western-purple">Waddling Warlords!</span>
@@ -203,16 +203,16 @@ export default function HomePage() {
                 </motion.section>
 
                 {/* ─── TECH TICKER ─── */}
-                <div className="mt-10 flex items-center justify-center gap-4 text-[11px] font-semibold uppercase tracking-[0.18em] text-black/30">
-                    <span>YOLO</span>
-                    <span>·</span>
-                    <span>Gemini</span>
-                    <span>·</span>
-                    <span>Nesting Detection</span>
-                    <span>·</span>
-                    <span>Aggression Signals</span>
-                    <span>·</span>
-                    <span>Live Campus Map</span>
+                <div className="mt-10 flex w-full min-w-0 max-w-full flex-wrap items-center justify-center gap-x-2.5 gap-y-1.5 px-1 text-center text-[10px] font-semibold uppercase tracking-[0.12em] text-black/30 sm:gap-x-4 sm:text-[11px] sm:tracking-[0.18em]">
+                    <span className="whitespace-nowrap">YOLO</span>
+                    <span aria-hidden>·</span>
+                    <span className="whitespace-nowrap">Gemini</span>
+                    <span aria-hidden>·</span>
+                    <span className="whitespace-nowrap">Nesting Detection</span>
+                    <span aria-hidden>·</span>
+                    <span className="whitespace-nowrap">Aggression Signals</span>
+                    <span aria-hidden>·</span>
+                    <span className="whitespace-nowrap">Live Campus Map</span>
                 </div>
 
                 {/* ─── MAP SECTION ─── */}
@@ -220,7 +220,7 @@ export default function HomePage() {
                     <p className="text-xs font-semibold uppercase tracking-[0.18em] text-western-purple/70">
                         The Campus Map
                     </p>
-                    <h2 className="mt-3 text-balance text-4xl font-semibold tracking-tight text-black md:text-5xl">
+                    <h2 className="mt-3 text-balance text-3xl font-semibold tracking-tight break-words text-black sm:text-4xl md:text-5xl">
                         Never get ambushed by a cobra chicken again.{" "}
                         <span aria-hidden>🪿</span>
                     </h2>
@@ -230,11 +230,10 @@ export default function HomePage() {
                         campus every day.
                     </p>
                     <div className="relative mt-8 overflow-hidden rounded-3xl border border-western-purple/15 shadow-sm">
-                        <div className="h-64 w-full md:h-95">
-                            <GooseMapDynamic sightings={sightings} />
+                        <div className="pointer-events-none h-64 w-full md:h-95">
+                            <GooseMapDynamic sightings={sightings} interactive={false} />
                         </div>
-                        {/* Floating CTA over map */}
-                        <div className="absolute bottom-5 left-1/2 -translate-x-1/2">
+                        <div className="absolute bottom-5 left-1/2 z-10 -translate-x-1/2">
                             <Link
                                 href="/map"
                                 className="rounded-full bg-black px-6 py-3 font-semibold text-white shadow-lg transition hover:bg-western-purple"
@@ -253,23 +252,17 @@ export default function HomePage() {
                             How it works
                         </p>
                         <h2 className="mt-3 text-5xl font-semibold leading-[1.02] tracking-tight text-black md:text-6xl">
-                            Snap.
+                            Capture.
                             <br />
-                            Detect.
+                            Analyze.
                             <br />
-                            Avoid.
+                            Evade.
                         </h2>
                         <p className="mt-5 max-w-sm text-black/60">
                             Wingman AI processes sightings from Western students and updates
                             the map fast enough for real, day-to-day route decisions. Built
                             in-house, with no third-party tracking.
                         </p>
-                        <Link
-                            href="/map"
-                            className="mt-7 inline-flex rounded-full bg-black px-6 py-3 font-semibold text-white transition hover:bg-western-purple"
-                        >
-                            See it on the map
-                        </Link>
                     </div>
 
                     {/* Right: step cards */}
@@ -277,20 +270,20 @@ export default function HomePage() {
                         {steps.map((step, idx) => (
                             <div
                                 key={step.title}
-                                className="group rounded-2xl border border-black/8 bg-white/60 p-5 shadow-sm transition hover:border-western-purple/20 hover:bg-white hover:shadow-western-purple/10"
+                                className="rounded-2xl border border-western-purple/20 bg-white p-5 shadow-sm shadow-western-purple/10 md:transition-transform md:hover:scale-105"
                             >
                                 <div className="flex items-start gap-4">
-                                    <div className="mt-0.5 flex size-9 shrink-0 items-center justify-center rounded-full bg-black/5 text-black/40 transition group-hover:bg-black group-hover:text-white">
+                                    <div className="mt-0.5 flex size-9 shrink-0 items-center justify-center rounded-full bg-black text-white">
                                         <step.icon className="size-4" />
                                     </div>
-                                    <div>
-                                        <p className="text-xs font-semibold uppercase tracking-wide text-black/30 transition group-hover:text-western-purple">
+                                    <div className="min-w-0">
+                                        <p className="text-xs font-semibold uppercase tracking-wide text-western-purple">
                                             {String(idx + 1).padStart(2, "0")}
                                         </p>
-                                        <h3 className="mt-0.5 text-base font-semibold text-black/50 transition group-hover:text-black">
+                                        <h3 className="mt-0.5 text-base font-semibold text-black">
                                             {step.title}
                                         </h3>
-                                        <p className="mt-1.5 text-sm text-black/40 transition group-hover:text-black/70">
+                                        <p className="mt-1.5 text-sm text-black/70">
                                             {step.detail}
                                         </p>
                                     </div>

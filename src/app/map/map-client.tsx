@@ -6,6 +6,7 @@ import { Box, List, Shield, TriangleAlert } from "lucide-react";
 import { toast } from "sonner";
 import { GooseMapDynamic } from "@/components/map/GooseMapDynamic";
 import { Header } from "@/components/layout/Header";
+import { MobileNav } from "@/components/layout/MobileNav";
 import { LiveCounter } from "@/components/ui/LiveCounter";
 import { ReportButton } from "@/components/ui/ReportButton";
 import { SightingListRow } from "@/components/ui/SightingListRow";
@@ -209,7 +210,7 @@ function MapZoomDebug({ map }: { map: maplibregl.Map | null }) {
 
     return (
         <div
-            className="pointer-events-none absolute top-3 left-3 z-20 rounded-lg border border-black/10 bg-white/90 px-2.5 py-1.5 font-mono text-xs font-semibold text-neutral-800 shadow-md backdrop-blur-sm"
+            className="pointer-events-none absolute top-20 left-3 z-20 rounded-lg border border-black/10 bg-white/90 px-2.5 py-1.5 font-mono text-xs font-semibold text-neutral-800 shadow-md backdrop-blur-sm md:top-24"
             aria-hidden
         >
             zoom {zoom.toFixed(2)}
@@ -230,23 +231,27 @@ export function MapPageClient() {
     }, []);
 
     return (
-        <div className="relative flex h-dvh flex-col overflow-hidden bg-western-purple-faint">
+        <div className="relative h-dvh overflow-hidden bg-western-purple-faint">
 
             <Header />
 
-            <div className="relative z-10 min-h-0 flex-1">
+            <div className="absolute inset-0">
                 <GooseMapDynamic sightings={sightings} onMapReady={handleMapReady} />
                 <MapZoomDebug map={mapInstance} />
 
+                <div className="pointer-events-auto absolute top-20 right-3 z-20 md:top-24 md:right-[22rem]">
+                    <Map3DButton mapRef={mapRef} className="h-10 cursor-pointer" />
+                </div>
+
                 {/* Floating right panel - desktop */}
                 <aside
-                    className="pointer-events-auto absolute top-3 right-5 bottom-10 z-20 hidden w-[min(290px,calc(100vw-1.5rem))] flex-col overflow-hidden rounded-2xl border border-black/8 bg-white shadow-[0_12px_48px_rgba(0,0,0,0.14)] md:flex"
+                    className="pointer-events-auto absolute top-20 right-5 bottom-10 z-20 hidden w-[min(290px,calc(100vw-1.5rem))] flex-col overflow-hidden rounded-2xl border border-black/8 bg-white shadow-[0_12px_48px_rgba(0,0,0,0.14)] md:top-24 md:flex"
                     aria-label="Live campus map panel"
                 >
                     <CampusPanel sightings={sightings} filter={filter} onFilterChange={setFilter} />
                 </aside>
 
-                {/* Bottom floating controls - mobile */}
+                {/* Bottom floating controls */}
                 <div className="pointer-events-none absolute inset-x-0 bottom-0 z-30 flex flex-col items-center gap-2.5 px-4 pb-[max(1rem,env(safe-area-inset-bottom))] pt-2 md:bottom-6 md:gap-3 md:pb-6">
                     <Button
                         type="button"
@@ -259,7 +264,6 @@ export function MapPageClient() {
                     </Button>
                     <div className="pointer-events-auto flex max-w-full flex-wrap items-center justify-center gap-2 md:gap-3">
                         <ReportButton className="h-12 shrink-0 rounded-full bg-black px-5 text-base text-white shadow-lg hover:bg-western-purple sm:px-6 hover:px-7" />
-                        <Map3DButton mapRef={mapRef} className="h-12 shrink-0 cursor-pointer" />
                         <SafeRouteButton className="h-12 shrink-0 rounded-full px-4 sm:px-5 cursor-pointer" />
                     </div>
                 </div>
@@ -278,6 +282,8 @@ export function MapPageClient() {
                     </SheetContent>
                 </Sheet>
             </div>
+
+            <MobileNav placement="side" />
         </div>
     );
 }
