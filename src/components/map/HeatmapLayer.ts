@@ -18,7 +18,7 @@ export function buildSightingsGeoJSON(sightings: Sighting[]): GeoJSON.FeatureCol
   };
 }
 
-/** Heatmap: purple wash into strong red danger cores (waddleloo-style blobs) */
+/** Heatmap: purple wash into strong red danger cores */
 export const heatmapPaint = {
   "heatmap-weight": ["*", 1.2, ["get", "risk"]],
   "heatmap-radius": 52,

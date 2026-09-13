@@ -1,7 +1,7 @@
 import type { Sighting } from "@/types";
 
 function gooseRange(total: number): string {
-    if (total <= 0) return "—";
+    if (total <= 0) return "0";
     const low = Math.max(1, Math.floor(total * 0.85));
     const high = Math.max(low + 1, Math.ceil(total * 1.15));
     return `${low}-${high}`;

@@ -20,7 +20,7 @@ const steps = [
         icon: Sparkles,
         title: "AI analyses and flags them",
         detail:
-            "Wingman AI estimates flock size, reads nesting posture and wing position, and assigns a live risk level — no Waterloo tools involved.",
+            "Wingman AI estimates flock size, reads nesting posture and wing position, and assigns a live risk level.",
     },
     {
         icon: MapPinned,
@@ -51,18 +51,18 @@ export default function HomePage() {
 
             <Header />
 
-            {/* Rivalry ticker — replaces waddleloo's expansion banner */}
+            {/* Campus ticker */}
             <div className="relative z-10 mt-5 border-y border-western-purple/10 bg-western-purple/25 px-4 py-2 text-xs text-western-purple md:text-sm">
                 <div className="mx-auto flex w-full max-w-6xl items-center justify-center">
                     <span className="flex items-center font-medium">
-                        Built by Mustangs, for Mustangs. Western-only. No Waterloo data, no Waterloo tools.
+                        Built by Mustangs, for Mustangs.
                     </span>
                 </div>
             </div>
 
             <main className="relative z-10 mx-auto w-full max-w-lg flex-1 px-6 pt-8 pb-10 md:max-w-6xl md:pt-12">
 
-                {/* ─── HERO SPLIT (mirrors waddleloo exactly) ─── */}
+                {/* ─── HERO SPLIT ─── */}
                 <motion.section
                     initial={{ opacity: 0, y: 10 }}
                     animate={{ opacity: 1, y: 0 }}
@@ -90,14 +90,11 @@ export default function HomePage() {
                                 you walk.
                             </p>
 
-                            {/* Rivalry callout — replaces "Now covering Laurier" pills */}
+                            {/* Coverage pill */}
                             <div className="mt-5 flex flex-wrap items-center gap-2">
                                 <span className="inline-flex items-center gap-1.5 rounded-full border border-western-purple/25 bg-western-purple-faint px-3 py-1 text-xs font-medium text-western-purple">
                                     <span className="size-1.5 rounded-full bg-western-purple" />
                                     Western-only coverage
-                                </span>
-                                <span className="inline-flex items-center gap-1.5 rounded-full border border-black/10 bg-black/4 px-3 py-1 text-xs font-medium text-black/60">
-                                    No Waterloo. Just us.
                                 </span>
                             </div>
                         </div>
@@ -129,7 +126,7 @@ export default function HomePage() {
                             </div>
                         </div>
 
-                        {/* Sighting list — mirrors waddleloo's right-panel list */}
+                        {/* Sighting list */}
                         <div className="p-4 md:p-5">
                             <div className="mb-3 flex items-center justify-between">
                                 <p className="flex items-center gap-1.5 text-sm font-semibold text-black">
@@ -147,7 +144,7 @@ export default function HomePage() {
                             <div className="space-y-0 divide-y divide-black/6">
                                 {mapPreview.length === 0 ? (
                                     <p className="py-3 text-sm text-black/50">
-                                        No reports yet — be the first Mustang to mark today's goose
+                                        No reports yet. Be the first Mustang to mark today's goose
                                         activity.
                                     </p>
                                 ) : (
@@ -184,7 +181,7 @@ export default function HomePage() {
                                 )}
                             </div>
 
-                            {/* Footer stat line — mirrors waddleloo's "97 active geese · 15 zones" */}
+                            {/* Footer stat line */}
                             {sightings.length > 0 && (
                                 <div className="mt-3 flex items-center justify-between border-t border-black/6 pt-3">
                                     <p className="text-xs font-semibold text-black">
@@ -205,7 +202,7 @@ export default function HomePage() {
                     </div>
                 </motion.section>
 
-                {/* ─── TECH TICKER (mirrors waddleloo's "YOLO · GEMINI · NESTING" line) ─── */}
+                {/* ─── TECH TICKER ─── */}
                 <div className="mt-10 flex items-center justify-center gap-4 text-[11px] font-semibold uppercase tracking-[0.18em] text-black/30">
                     <span>YOLO</span>
                     <span>·</span>
@@ -218,7 +215,7 @@ export default function HomePage() {
                     <span>Live Campus Map</span>
                 </div>
 
-                {/* ─── MAP SECTION (mirrors waddleloo's "Never get ambushed" section) ─── */}
+                {/* ─── MAP SECTION ─── */}
                 <section className="mt-20 text-center">
                     <p className="text-xs font-semibold uppercase tracking-[0.18em] text-western-purple/70">
                         The Campus Map
@@ -229,14 +226,14 @@ export default function HomePage() {
                     </h2>
                     <p className="mx-auto mt-4 max-w-xl text-black/60">
                         See active nesting zones, aggressive flocks, and high-risk paths
-                        across Western before you head out. Built for Mustangs — not shared
-                        with anyone else.
+                        across Western before you head out. Built for Mustangs walking
+                        campus every day.
                     </p>
                     <div className="relative mt-8 overflow-hidden rounded-3xl border border-western-purple/15 shadow-sm">
                         <div className="h-64 w-full md:h-95">
                             <GooseMapDynamic sightings={sightings} />
                         </div>
-                        {/* Floating CTA over map — mirrors waddleloo's "Open Live Map" button */}
+                        {/* Floating CTA over map */}
                         <div className="absolute bottom-5 left-1/2 -translate-x-1/2">
                             <Link
                                 href="/map"
@@ -248,7 +245,7 @@ export default function HomePage() {
                     </div>
                 </section>
 
-                {/* ─── HOW IT WORKS (mirrors waddleloo's Snap · Detect · Avoid section) ─── */}
+                {/* ─── HOW IT WORKS ─── */}
                 <section className="mt-24 grid gap-10 md:grid-cols-[0.9fr_1.1fr] md:items-start">
                     {/* Left: big text + description */}
                     <div className="md:sticky md:top-28">
@@ -264,8 +261,8 @@ export default function HomePage() {
                         </h2>
                         <p className="mt-5 max-w-sm text-black/60">
                             Wingman AI processes sightings from Western students and updates
-                            the map fast enough for real, day-to-day route decisions — built
-                            in-house, no third-party tracking.
+                            the map fast enough for real, day-to-day route decisions. Built
+                            in-house, with no third-party tracking.
                         </p>
                         <Link
                             href="/map"
@@ -275,7 +272,7 @@ export default function HomePage() {
                         </Link>
                     </div>
 
-                    {/* Right: step cards — mirrors waddleloo's stacked cards with active highlight */}
+                    {/* Right: step cards */}
                     <div className="space-y-4">
                         {steps.map((step, idx) => (
                             <div
@@ -303,7 +300,7 @@ export default function HomePage() {
                     </div>
                 </section>
 
-                {/* ─── PARTNER SECTION (mirrors waddleloo's partner/stats section) ─── */}
+                {/* ─── PARTNER SECTION ─── */}
                 <section className="mt-24 rounded-3xl border border-western-purple/15 bg-white px-6 py-10 shadow-sm md:px-12 md:py-14">
                     <p className="text-xs font-semibold uppercase tracking-[0.18em] text-western-purple/70">
                         Partner with Western Wingman
@@ -320,7 +317,7 @@ export default function HomePage() {
                         love to connect.
                     </p>
 
-                    {/* Stats row — mirrors waddleloo's 4-stat grid */}
+                    {/* Stats row */}
                     {/* <div className="mt-10 grid gap-6 border-y border-black/8 py-8 md:grid-cols-4">
                         {[
                             { stat: "35k+", label: "students at Western" },

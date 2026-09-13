@@ -145,7 +145,7 @@
   }
 }
 
-/* Goose sighting markers (HTML MapLibre markers — not WebGL symbol layer) */
+/* Goose sighting markers (HTML MapLibre markers, not a WebGL symbol layer) */
 .goose-map-marker {
   border: none;
   background: transparent;

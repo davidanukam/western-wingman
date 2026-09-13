@@ -42,7 +42,7 @@ function waitForMapReady(m: maplibregl.Map): Promise<void> {
   });
 }
 
-/** Heatmap + HTML markers. Safe to call before sightings fetch completes — call again when data arrives. */
+/** Heatmap + HTML markers. Safe to call before sightings fetch completes. Call again when data arrives. */
 export async function applySightingsToMap(
   m: maplibregl.Map,
   sightings: Sighting[],

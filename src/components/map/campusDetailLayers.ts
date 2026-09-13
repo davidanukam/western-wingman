@@ -93,7 +93,7 @@ export async function ensureCampusDetailLayers(map: maplibregl.Map): Promise<voi
     },
   } as AddLayerObject);
 
-  // POI name labels — icon carries meaning (P = parking, B = bus, etc.)
+  // POI name labels. The icon carries meaning (P = parking, B = bus, etc.)
   map.addLayer({
     id: "western-campus-poi-labels",
     type: "symbol",

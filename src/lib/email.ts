@@ -61,7 +61,7 @@ export async function sendPendingApprovalEmail(
   `;
 
   if (!isEmailConfigured()) {
-    console.info("[email] Resend not configured — approval links:", { approveUrl, rejectUrl });
+    console.info("[email] Resend not configured. Approval links:", { approveUrl, rejectUrl });
     return { sent: false, devLinks: { approve: approveUrl, reject: rejectUrl } };
   }
 
@@ -69,7 +69,7 @@ export async function sendPendingApprovalEmail(
   await resend.emails.send({
     from: process.env.EMAIL_FROM!,
     to: process.env.APPROVER_EMAIL!,
-    subject: `[Western Wingman] ${data.gooseCount} geese — approval needed`,
+    subject: `[Western Wingman] ${data.gooseCount} geese: approval needed`,
     html,
   });
 

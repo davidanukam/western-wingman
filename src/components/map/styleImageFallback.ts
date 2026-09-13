@@ -1,6 +1,6 @@
 import type maplibregl from "maplibre-gl";
 
-/** 1×1 transparent RGBA — placeholder for sprites missing from the base style sheet. */
+/** 1x1 transparent RGBA placeholder for sprites missing from the base style sheet. */
 const TRANSPARENT_PIXEL = new Uint8Array(4);
 
 /**

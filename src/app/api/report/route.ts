@@ -191,7 +191,7 @@ export async function POST(req: Request) {
         emailSent: emailResult.sent,
         devLinks: emailResult.devLinks,
         message:
-          "Report sent for review — it will appear on the map once approved.",
+          "Report sent for review. It will appear on the map once approved.",
       },
       { status: 201 }
     );

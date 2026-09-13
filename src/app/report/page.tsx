@@ -41,7 +41,7 @@ const whatHappensNext = [
     {
         title: "Behavioural intelligence",
         detail:
-            "A second AI pass analyses the frame for goslings, nesting posture, spread wings, and lowered-neck aggression signals — the cues that matter most for safety.",
+            "A second AI pass analyses the frame for goslings, nesting posture, spread wings, and lowered-neck aggression signals. Those are the cues that matter most for safety.",
     },
     {
         title: "Live campus hotspot",
@@ -181,7 +181,7 @@ export default function ReportPage() {
             };
             toast.success(
                 result.message ??
-                    "Report sent for review — it will appear on the map once approved."
+                    "Report sent for review. It will appear on the map once approved."
             );
             if (result.devLinks) {
                 console.info("Approval links (dev):", result.devLinks);
@@ -358,7 +358,7 @@ export default function ReportPage() {
                         </div>
                     )}
 
-                    {/* What happens next — shown before analysis */}
+                    {/* What happens next, shown before analysis */}
                     {!analysis && !loading && (
                         <div className="rounded-2xl border border-western-purple/15 bg-white/70 p-5">
                             <p className="mb-4 text-xs font-semibold uppercase tracking-[0.18em] text-western-purple/60">

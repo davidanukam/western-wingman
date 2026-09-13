@@ -7,7 +7,7 @@ type MarkerRecord = {
   popup: maplibregl.Popup;
 };
 
-/** Per-map registry — module-level Map caused stale markers after reload/style change. */
+/** Per-map registry. A module-level Map caused stale markers after reload/style change. */
 const registryByMap = new WeakMap<maplibregl.Map, Map<string, MarkerRecord>>();
 const zoomHandlerByMap = new WeakMap<maplibregl.Map, () => void>();
 
@@ -75,9 +75,9 @@ function buildPopupHtml(s: Sighting): string {
     s.aiSummary ??
     s.description ??
     (s.isNesting
-      ? "Nesting activity possible — keep dogs leashed and stay on paths."
+      ? "Nesting activity possible. Keep dogs leashed and stay on paths."
       : s.isAggressive
-        ? "Aggressive behaviour reported — give the area space."
+        ? "Aggressive behaviour reported. Give the area space."
         : "Geese reported in this area.");
 
   return `
@@ -157,7 +157,7 @@ function ensureZoomHandler(map: maplibregl.Map): void {
   map.on("zoom", handler);
 }
 
-/** Drop all markers for one map (required after style reload — MapLibre detaches DOM markers). */
+/** Drop all markers for one map (required after style reload, when MapLibre detaches DOM markers). */
 export function clearGooseMarkersForMap(map: maplibregl.Map): void {
   const registry = registryByMap.get(map);
   if (!registry) return;

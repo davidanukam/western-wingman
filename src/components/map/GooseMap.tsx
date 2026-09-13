@@ -78,7 +78,7 @@ export function GooseMap({ sightings, onMapReady }: GooseMapProps) {
       })();
     };
 
-    /** Style reload drops DOM markers — always recreate. Skip duplicate first style.load before load finishes. */
+    /** Style reload drops DOM markers. Always recreate. Skip duplicate first style.load before load finishes. */
     const onStyleLoad = () => {
       if (!initialLoadDoneRef.current) return;
       void applySightingsToMap(map, sightingsRef.current, { recreateMarkers: true });

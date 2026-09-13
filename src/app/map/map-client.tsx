@@ -55,8 +55,8 @@ function RiskAlertCards({ sightings }: { sightings: Sighting[] }) {
                         <p className="font-bold text-neutral-900">{s.locationName ?? "Campus"}</p>
                         <p className="text-sm leading-snug text-neutral-700">
                             {s.riskLevel === "high"
-                                ? s.aiSummary ?? "High-risk goose activity reported — give the area space."
-                                : s.aiSummary ?? "Nesting activity possible — keep dogs leashed and stay on paths."}
+                                ? s.aiSummary ?? "High-risk goose activity reported. Give the area space."
+                                : s.aiSummary ?? "Nesting activity possible. Keep dogs leashed and stay on paths."}
                         </p>
                     </div>
                 </div>

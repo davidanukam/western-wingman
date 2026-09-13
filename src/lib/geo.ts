@@ -11,7 +11,7 @@ export function haversineMeters(lat1: number, lng1: number, lat2: number, lng2: 
   return R * c;
 }
 
-/** SW and NE corners [lng, lat] — main Western University campus + small margin */
+/** SW and NE corners [lng, lat] for the main Western University campus, plus a small margin */
 export const WESTERN_CAMPUS_BOUNDS = {
   sw: [-81.305, 42.985] as [number, number],
   ne: [-81.235, 43.035] as [number, number],
