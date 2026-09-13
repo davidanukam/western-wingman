@@ -11,38 +11,8 @@ const items = [
   { href: "/report", label: "Report", icon: PlusCircle },
 ];
 
-export function MobileNav({
-  placement = "bottom",
-}: {
-  placement?: "bottom" | "side";
-}) {
+export function MobileNav() {
   const pathname = usePathname();
-
-  if (placement === "side") {
-    return (
-      <nav
-        className="fixed top-1/2 right-[max(0.75rem,env(safe-area-inset-right))] z-40 flex -translate-y-1/2 flex-col gap-1 rounded-2xl border border-black/10 bg-white/90 p-1.5 shadow-lg backdrop-blur-md md:hidden"
-        aria-label="Primary"
-      >
-        {items.map(({ href, label, icon: Icon }) => {
-          const active = pathname === href || (href !== "/" && pathname.startsWith(href));
-          return (
-            <Link
-              key={href}
-              href={href}
-              className={cn(
-                "flex w-14 flex-col items-center gap-0.5 rounded-xl px-1 py-2 text-[10px] font-medium",
-                active ? "bg-western-purple/10 text-western-purple" : "text-muted-foreground"
-              )}
-            >
-              <Icon className={cn("size-5", active && "text-western-purple")} aria-hidden />
-              {label}
-            </Link>
-          );
-        })}
-      </nav>
-    );
-  }
 
   return (
     <nav

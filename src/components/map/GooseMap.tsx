@@ -54,6 +54,7 @@ export function GooseMap({ sightings, onMapReady, interactive = true }: GooseMap
       fadeDuration: 0,
       refreshExpiredTiles: false,
       interactive,
+      attributionControl: false,
     });
 
     mapInstance.current = map;

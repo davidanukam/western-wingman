@@ -32,6 +32,7 @@ export function MiniMapPicker({ lat, lng, onPick }: MiniMapPickerProps) {
       style: DEFAULT_MAP_STYLE,
       center: [initialCenter.lng, initialCenter.lat],
       zoom: 16,
+      attributionControl: false,
     });
 
     const marker = new maplibregl.Marker({ color: "#4f2683" })

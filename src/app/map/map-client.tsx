@@ -8,7 +8,6 @@ import { GooseMapDynamic } from "@/components/map/GooseMapDynamic";
 import { Header } from "@/components/layout/Header";
 import { MobileNav } from "@/components/layout/MobileNav";
 import { LiveCounter } from "@/components/ui/LiveCounter";
-import { ReportButton } from "@/components/ui/ReportButton";
 import { SightingListRow } from "@/components/ui/SightingListRow";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetHeader, SheetTitle } from "@/components/ui/sheet";
@@ -239,9 +238,17 @@ export function MapPageClient() {
                 <GooseMapDynamic sightings={sightings} onMapReady={handleMapReady} />
                 <MapZoomDebug map={mapInstance} />
 
-                <div className="pointer-events-auto absolute top-20 right-3 z-20 md:top-24 md:right-[22rem]">
+                <div className="pointer-events-auto absolute top-20 left-1/2 z-20 -translate-x-1/2 md:top-24">
+                    <SafeRouteButton className="h-10" />
+                </div>
+
+                <div className="pointer-events-auto absolute top-20 right-3 z-20 md:top-auto md:right-auto md:bottom-6 md:left-6">
                     <Map3DButton mapRef={mapRef} className="h-10 cursor-pointer" />
                 </div>
+
+                <p className="pointer-events-none absolute right-2 z-10 text-[9px] text-black/35 md:bottom-3 bottom-[5.75rem]">
+                    © OpenStreetMap
+                </p>
 
                 {/* Floating right panel - desktop */}
                 <aside
@@ -251,22 +258,15 @@ export function MapPageClient() {
                     <CampusPanel sightings={sightings} filter={filter} onFilterChange={setFilter} />
                 </aside>
 
-                {/* Bottom floating controls */}
-                <div className="pointer-events-none absolute inset-x-0 bottom-0 z-30 flex flex-col items-center gap-2.5 px-4 pb-[max(1rem,env(safe-area-inset-bottom))] pt-2 md:bottom-6 md:gap-3 md:pb-6">
-                    <Button
-                        type="button"
-                        variant="secondary"
-                        className="pointer-events-auto rounded-full border border-black/10 bg-white px-5 py-2.5 font-semibold text-neutral-900 shadow-lg backdrop-blur-sm md:hidden"
-                        onClick={() => setSheetOpen(true)}
-                    >
-                        <List className="mr-2 size-4 shrink-0" aria-hidden />
-                        Sightings
-                    </Button>
-                    <div className="pointer-events-auto flex max-w-full flex-wrap items-center justify-center gap-2 md:gap-3">
-                        <ReportButton className="h-12 shrink-0 rounded-full bg-black px-5 text-base text-white shadow-lg hover:bg-western-purple sm:px-6 hover:px-7" />
-                        <SafeRouteButton className="h-12 shrink-0 rounded-full px-4 sm:px-5 cursor-pointer" />
-                    </div>
-                </div>
+                <Button
+                    type="button"
+                    variant="secondary"
+                    className="pointer-events-auto absolute left-1/2 z-30 -translate-x-1/2 rounded-full border border-black/10 bg-white px-5 py-2.5 font-semibold text-neutral-900 shadow-lg backdrop-blur-sm md:hidden bottom-[calc(4.5rem+env(safe-area-inset-bottom))]"
+                    onClick={() => setSheetOpen(true)}
+                >
+                    <List className="mr-2 size-4 shrink-0" aria-hidden />
+                    Sightings
+                </Button>
 
                 <Sheet open={sheetOpen} onOpenChange={setSheetOpen}>
                     <SheetContent side="bottom" className="flex max-h-[78vh] flex-col gap-0 rounded-t-2xl p-0">
@@ -283,7 +283,7 @@ export function MapPageClient() {
                 </Sheet>
             </div>
 
-            <MobileNav placement="side" />
+            <MobileNav />
         </div>
     );
 }

@@ -6,6 +6,7 @@ import { Camera, MapPinned, Route, Sparkles } from "lucide-react";
 import { Header } from "@/components/layout/Header";
 import { MobileNav } from "@/components/layout/MobileNav";
 import { GooseMapDynamic } from "@/components/map/GooseMapDynamic";
+import { GooseCarousel } from "@/components/ui/GooseCarousel";
 import { SightingCard } from "@/components/ui/SightingCard";
 import { useSightings } from "@/hooks/useSightings";
 
@@ -229,19 +230,15 @@ export default function HomePage() {
                         across Western before you head out. Built for Mustangs walking
                         campus every day.
                     </p>
-                    <div className="relative mt-8 overflow-hidden rounded-3xl border border-western-purple/15 shadow-sm">
-                        <div className="pointer-events-none h-64 w-full md:h-95">
-                            <GooseMapDynamic sightings={sightings} interactive={false} />
-                        </div>
-                        <div className="absolute bottom-5 left-1/2 z-10 -translate-x-1/2">
-                            <Link
-                                href="/map"
-                                className="rounded-full bg-black px-6 py-3 font-semibold text-white shadow-lg transition hover:bg-western-purple"
-                            >
-                                Open Live Map
-                            </Link>
-                        </div>
+                    <div className="mt-8">
+                        <GooseCarousel />
                     </div>
+                    <Link
+                        href="/map"
+                        className="mt-6 inline-flex rounded-full bg-black px-6 py-3 font-semibold text-white shadow-lg transition hover:bg-western-purple"
+                    >
+                        Open Live Map
+                    </Link>
                 </section>
 
                 {/* ─── HOW IT WORKS ─── */}

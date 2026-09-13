@@ -216,3 +216,9 @@
   line-height: 1.45;
   color: #4b5563;
 }
+
+.maplibregl-ctrl-attrib,
+.maplibregl-compact,
+.maplibregl-ctrl-attrib-button {
+  display: none !important;
+}
