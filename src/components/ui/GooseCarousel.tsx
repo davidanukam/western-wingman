@@ -111,7 +111,7 @@ export function GooseCarousel() {
               src={slide.src}
               alt={slide.alt}
               draggable={false}
-              className="h-52 w-40 rounded-2xl object-cover shadow-[0_18px_40px_rgba(0,0,0,0.28)] md:h-72 md:w-56"
+              className="h-52 w-40 rounded-2xl object-cover md:h-72 md:w-56"
             />
           </div>
         ))}
