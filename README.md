@@ -28,8 +28,4 @@
         <img src="https://img.shields.io/github/license/davidanukam/western-wingman" alt="license" />
     </a>
   </p>
-
-  <p>
-    <a href="https://western-wingman.vercel.app/" target="_blank">Western-Wingman</a>
-  </p>
 </div>
