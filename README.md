@@ -2,7 +2,7 @@
 
   <img src="icon.png" alt="logo" width="200" height="auto" />
 
-  <a href="https://western-wingman.vercel.app/" target="_blank"><h1>Western Wingman</h1></a>
+  <h1><a href="https://western-wingman.vercel.app/" target="_blank">Western Wingman</a></h1>
 
   <p>
     Live goose sightings, heatmap, and safety routes for Western University campus
@@ -27,5 +27,9 @@
     <a href="https://github.com/davidanukam/western-wingman/blob/main/LICENSE">
         <img src="https://img.shields.io/github/license/davidanukam/western-wingman" alt="license" />
     </a>
+  </p>
+
+  <p>
+    <a href="https://western-wingman.vercel.app/" target="_blank">Western-Wingman</a>
   </p>
 </div>
